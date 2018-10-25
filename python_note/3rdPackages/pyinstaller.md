@@ -33,4 +33,4 @@ a = Analysis(['stockcharm.py'],
              noarchive=False)
 ```
 
-Then run `pyinstaller -F  *.spec --clean` to generate exe file
+Then run `pyinstaller -Fw  *.spec --clean` to generate exe file
