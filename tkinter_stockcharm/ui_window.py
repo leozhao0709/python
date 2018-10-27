@@ -2,6 +2,7 @@ import tkinter
 import logging
 import pickle
 import os
+import platform
 from tkinter import ttk
 from tkinter.scrolledtext import ScrolledText
 from tkinter import messagebox
@@ -41,7 +42,18 @@ def showDeleteMsgBox(listBox: tkinter.Listbox):
 
 def run_selenium(loggerTextArea: ScrolledText, symbols: Tuple[str], page_load_time, logger):
     loggerTextArea.delete(1.0, tkinter.END)
-    driver = driverInit(driver_logging=logger)
+
+    chromeDriverPath: str = os.path.join(
+        os.path.dirname(__file__), 'driver', 'chromedriver_unix')
+
+    if platform.system() == 'Windows':
+        chromeDriverPath = os.path.join(os.path.dirname(
+            __file__), 'driver', 'chromedriver_win32.exe')
+    elif platform.system() == 'Linux':
+        chromeDriverPath = os.path.join(os.path.dirname(
+            __file__), 'driver', 'chromedriver_linux')
+
+    driver = driverInit(driver_path=chromeDriverPath, driver_logging=logger)
     for symbol in symbols:
         stockChartsRun(symbol, driver, page_load_time, stock_logging=logger)
 

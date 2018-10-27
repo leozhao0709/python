@@ -1,4 +1,4 @@
-# Pyinstaller
+# Pyinstaller (for windows and linux. Mac os X had a bug now)
 
 Note: Pyinstaller looks currently only works good on windows. For mac, please take a look for py2app
 

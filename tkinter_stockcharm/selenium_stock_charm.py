@@ -1,4 +1,3 @@
-import platform
 import os
 from create_logging import create_logging
 from selenium import webdriver
@@ -7,18 +6,8 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import Select
 
 
-def driverInit(driver_logging=create_logging()):
-    chromeDriverPath: str = os.path.join(
-        os.path.dirname(__file__), 'driver', 'chromedriver_unix')
-
-    if platform.system() == 'Windows':
-        chromeDriverPath = os.path.join(os.path.dirname(
-            __file__), 'driver', 'chromedriver_win32.exe')
-    elif platform.system() == 'Linux':
-        chromeDriverPath = os.path.join(os.path.dirname(
-            __file__), 'driver', 'chromedriver_linux')
-
-    driver = webdriver.Chrome(executable_path=chromeDriverPath)
+def driverInit(driver_path, driver_logging=create_logging()):
+    driver = webdriver.Chrome(executable_path=driver_path)
 
     initialUrl = 'https://www.google.com'
     try:
@@ -81,7 +70,17 @@ def stockChartsRun(symbol: str, driver: webdriver, page_load_time: int = 10, sto
 
 
 def main():
-    driverTest = driverInit()
+    chromeDriverPath: str = os.path.join(
+        os.path.dirname(__file__), 'driver', 'chromedriver_unix')
+
+    import platform
+    if platform.system() == 'Windows':
+        chromeDriverPath = os.path.join(os.path.dirname(
+            __file__), 'driver', 'chromedriver_win32.exe')
+    elif platform.system() == 'Linux':
+        chromeDriverPath = os.path.join(os.path.dirname(
+            __file__), 'driver', 'chromedriver_linux')
+    driverTest = driverInit(chromeDriverPath)
     stockChartsRun(symbol='IQ', driver=driverTest, page_load_time=10)
 
 
