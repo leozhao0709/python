@@ -23,7 +23,7 @@ def main():
 
     t1 = Thread(target=func1, args=(1,))
     t1.start()
-    t1.join()  # if we don't add join, then t1 won't wait mainThread running
+    t1.join()  # if we don't add join, then parent thread may end
 
     print('process end')
 
@@ -35,5 +35,5 @@ if __name__ == '__main__':
 Note:
 
 -   You can use `threading.current_thread().name` to get the thread name.
--   You can join the thread, then it will wait for its parent thread.
+-   You can join the thread, then it will run before parent thread ends.
 -   **Thread consume less resource than process**.

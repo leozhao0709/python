@@ -41,7 +41,7 @@ Note:
 -   use `Process(target, args)` to create a new process.
 -   `Process` must call `start` to start a new process.
 -   use `os.getpid()` to get the process id. Use `os.getppid()` to get the parent process id.
--   parent prcocess won't affect sun process. If parent process end, sun process may not end. If you want parent to wait sun process ends, then use `process.join()`.
+-   parent prcocess won't affect son process. If parent process end, son process may not end. If you want parent to wait sun process ends, then use `process.join()`.
 -   You can also use Pool to create multi process. Check below.
 -   **multiprocess can't share global value.** If you want to share, pleas use `multiprocessing.Queue`. Check the mutilprocess communication part.
 
